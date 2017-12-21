@@ -28,7 +28,7 @@ source /var/vcap/packages/your-package/bosh/runtime.env
 nginx ...
 ```
 
-See [packages/nginx-1.12-test](packages/nginx-1.12-test) and [jobs/nginx-1.12-test](jobs/nginx-1.12-test) for example.
+See [jobs/nginx-1.12-test](jobs/nginx-1.12-test) for example.
 
 ## Development
 
