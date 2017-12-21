@@ -1,0 +1,10 @@
+---
+name: nginx-1.12
+
+files:
+- nginx-1.12.2.tar.gz
+- headers-more-nginx-module-0.30.tar.gz
+- pcre-8.41.tar.gz
+- nginx-upload-module-2.2.tar.gz
+- nginx-upload-module.patch
+- runtime.env

@@ -1,0 +1,24 @@
+headers-more-nginx-module-0.30.tar.gz:
+  size: 27793
+  object_id: 62c97279-9ad3-493f-4eea-84d285af8e04
+  sha: a188a399f3e365a0831585a9d7aa0e6ed1a75f0d
+nginx-1.12.2.tar.gz:
+  size: 981687
+  object_id: 0f8789d8-cd22-45b1-74f9-d5533c5ebdb1
+  sha: 6b41d63befa4f52b0724b533e6292a6671b71fdc
+nginx-1.12.2.tar.gz.asc:
+  size: 455
+  object_id: 587764f0-28d8-4a61-6850-47acaccca051
+  sha: 5ca4e8961c809c83aa07d378cd7e68a2c77b86fd
+nginx-upload-module-2.2.tar.gz:
+  size: 28505
+  object_id: 62564e24-8b6c-4de5-4c52-13beb4f83fd1
+  sha: 74ccd116525a155db76f92a1cd484d9516a70398
+pcre-8.41.tar.gz:
+  size: 2068775
+  object_id: 175c52f2-382f-4ca5-4ebe-0649e02b5007
+  sha: dddf0995aefe04cc6267c1448ffef0e7b0560ec0
+pcre-8.41.tar.gz.sig:
+  size: 310
+  object_id: fab33091-a769-46c2-642c-70e26381eb66
+  sha: 68a9e527a6011d91567c1e56a6afe69fdaee3922
