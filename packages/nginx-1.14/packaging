@@ -1,0 +1,37 @@
+set -e -x
+
+echo "Extracting pcre..."
+tar xzvf pcre-8.42.tar.gz
+
+echo "Extracting headers-more module..."
+tar xzvf headers-more-nginx-module-0.30.tar.gz
+
+echo "Extracting nginx_upload module..."
+tar xzvf nginx-upload-module-2.2.tar.gz
+
+echo "Patching nginx upload module"
+pushd nginx-upload-module-2.2
+  patch -p1 < ../nginx-upload-module.patch
+popd
+
+echo "Extracting nginx..."
+tar xzvf nginx-1.14.0.tar.gz
+
+echo "Building nginx..."
+pushd nginx-1.14.0
+  ./configure \
+    --with-debug \
+    --prefix=${BOSH_INSTALL_TARGET} \
+    --with-pcre=../pcre-8.42 \
+    --add-module=../headers-more-nginx-module-0.30 \
+    --with-http_ssl_module \
+    --with-http_dav_module \
+    --add-module=../nginx-upload-module-2.2
+  # todo darwin
+
+  make
+  make install
+popd
+
+mkdir ${BOSH_INSTALL_TARGET}/bosh
+cp runtime.env ${BOSH_INSTALL_TARGET}/bosh/runtime.env

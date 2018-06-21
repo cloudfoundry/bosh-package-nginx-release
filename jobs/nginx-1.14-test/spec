@@ -1,0 +1,12 @@
+---
+name: nginx-1.14-test
+
+templates:
+  run: bin/run
+  nginx.conf: config/nginx.conf
+  welcome.html: nginx-root/welcome.html
+
+packages:
+- nginx-1.14
+
+properties: {}

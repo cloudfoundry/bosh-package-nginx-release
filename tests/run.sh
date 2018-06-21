@@ -16,6 +16,7 @@ echo "-----> `date`: Deploy"
 
 echo "-----> `date`: Run test errand"
 bosh -n -d test run-errand nginx-1.12-test
+bosh -n -d test run-errand nginx-1.14-test
 
 echo "-----> `date`: Delete deployments"
 bosh -n -d test delete-deployment
