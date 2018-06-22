@@ -15,7 +15,6 @@ echo "-----> `date`: Deploy"
 ( set -e; cd ./..; bosh -n -d test deploy ./manifests/test.yml )
 
 echo "-----> `date`: Run test errand"
-bosh -n -d test run-errand nginx-1.12-test
 bosh -n -d test run-errand nginx-1.14-test
 
 echo "-----> `date`: Delete deployments"

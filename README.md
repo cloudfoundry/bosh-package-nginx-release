@@ -12,12 +12,6 @@ The above code will add `nginx-1.14` to `your-release` and introduce a `spec.loc
 
 Included packages:
 
-- nginx-1.12 which includes:
-	- nginx-1.12.x.tar.gz
-	- headers-more-nginx-module-0.30.tar.gz
-	- pcre-8.x.tar.gz
-	- nginx-upload-module-2.2.tar.gz
-	- nginx-upload-module.patch
 - nginx-1.14 which includes:
 	- nginx-1.14.x.tar.gz
 	- pcre-8.x.tar.gz
@@ -40,13 +34,16 @@ See [jobs/nginx-1.14-test](jobs/nginx-1.14-test) for example.
 
 To run tests `cd tests/ && BOSH_ENVIRONMENT=vbox ./run.sh`
 
+## Updating this package
+
+Only include the latest version of the package in this release. This includes
+removing the old version from blobs, jobs, packages, and the manifest.
+
 ## Verify blobs
 
 ```
 $ mkdir tmp
 $ gpg --homedir tmp --import keys/*
-$ gpg --homedir tmp --verify blobs/nginx-1.12.2.tar.gz.asc
-$ gpg --homedir tmp --verify blobs/nginx-1.14.0.tar.gz.asc
-$ gpg --homedir tmp --verify blobs/pcre-8.41.tar.gz.sig
-$ gpg --homedir tmp --verify blobs/pcre-8.42.tar.gz.sig
+$ gpg --homedir tmp --verify blobs/*.asc
+$ gpg --homedir tmp --verify blobs/*.sig
 ```
