@@ -16,12 +16,16 @@ EOF
 
 bosh upload-blobs
 
-git add -A
-git status
-git commit -m "Adding blobs via concourse"
+if [[ -n $(git status --porcelain) ]]; then
+  git add -A
+  git status
+  git commit -m "Adding blobs via concourse"
+fi
 
 bosh create-release --final
 
-git add -A
-git status
-git commit -m "Final release via concourse"
+if [[ -n $(git status --porcelain) ]]; then
+  git add -A
+  git status
+  git commit -m "Final release via concourse"
+fi
