@@ -8,9 +8,6 @@ echo "Starting Docker and Director"
 start-bosh
 source /tmp/local-bosh/director/env
 
-echo "Docker env useful for copy-pasta during debugging"
-env | grep DOCKER_ | xargs -n1 echo export
-
 echo "Run tests"
 pushd tests
  ./run.sh
@@ -22,4 +19,3 @@ echo "Issue new release"
 echo "Concourse output"
 cd ..
 git clone nginx-release nginx-release-out
-
