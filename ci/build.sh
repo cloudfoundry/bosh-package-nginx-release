@@ -5,12 +5,8 @@ set -e -o pipefail
 cd nginx-release
 
 echo "Starting Docker and Director"
-source `which start-bosh` # source to load DOCKER_ env vars
+start-bosh
 source /tmp/local-bosh/director/env
-
-echo "(debug) Starting Docker daemon and Director"
-source ./ci/start-docker.sh
-start_docker
 
 echo "Docker env useful for copy-pasta during debugging"
 env | grep DOCKER_ | xargs -n1 echo export
