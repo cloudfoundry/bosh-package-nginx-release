@@ -39,6 +39,8 @@ To run tests `cd tests/ && BOSH_ENVIRONMENT=vbox ./run.sh`
 Only include the latest version of the package in this release. This includes
 removing the old version from blobs, jobs, packages, and the manifest.
 
+The current nginx blob was pulled from: http://nginx.org/en/download.html.
+
 ## Verify blobs
 
 ```
