@@ -8,6 +8,7 @@ jobs:
 - name: build
   plan:
   - get: nginx-release
+    trigger: true
   - task: build
     privileged: true
     file: nginx-release/ci/build.yml
