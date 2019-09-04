@@ -1,8 +1,8 @@
 ---
-name: nginx-1.14
+name: nginx-1.17.3
 
 files:
-- nginx-1.14.0.tar.gz
+- nginx-1.17.3.tar.gz
 - headers-more-nginx-module-0.30.tar.gz
 - pcre-8.42.tar.gz
 - nginx-upload-module-2.2.tar.gz

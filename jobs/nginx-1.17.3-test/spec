@@ -1,5 +1,5 @@
 ---
-name: nginx-1.14-test
+name: nginx-1.17.3-test
 
 templates:
   run: bin/run
@@ -7,6 +7,6 @@ templates:
   welcome.html: nginx-root/welcome.html
 
 packages:
-- nginx-1.14
+- nginx-1.17.3
 
 properties: {}

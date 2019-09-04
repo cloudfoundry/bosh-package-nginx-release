@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -eux
+
+source /var/vcap/packages/nginx-1.17.3/bosh/runtime.env
+cd /var/vcap/packages/nginx-1.17.3/
+nginx -c /var/vcap/jobs/nginx-1.17.3-test/config/nginx.conf &
+sleep 3
+curl http://localhost/welcome.html | grep nginx-test
+kill -9 $!
+
+# todo test upload?
