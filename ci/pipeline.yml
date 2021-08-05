@@ -1,9 +1,4 @@
 ---
-groups:
-- name: all
-  jobs:
-  - build
-
 jobs:
 - name: build
   plan:
