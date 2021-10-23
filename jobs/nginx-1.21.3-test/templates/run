@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -eux
+
+kill_nginx() {
+    # we must be sure to kill nginx so that `bosh run-errand` returns,
+    # otherwise `bosh run-errand` will hang indefinitely
+    kill -9 $NGINX_PID
+}
+
+
+source /var/vcap/packages/nginx-1.21.3/bosh/runtime.env
+cd /var/vcap/packages/nginx-1.21.3/
+
+nginx -c /var/vcap/jobs/nginx-1.21.3-test/config/nginx.conf &
+NGINX_PID=$!
+trap kill_nginx EXIT
+
+sleep 3
+curl http://localhost/welcome.html | grep nginx-test

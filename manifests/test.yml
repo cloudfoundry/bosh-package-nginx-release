@@ -18,11 +18,11 @@ update:
   update_watch_time: 5000-60000
 
 instance_groups:
-- name: nginx-1.17.3-test
+- name: nginx-1.21.3-test
   azs: [z1]
   instances: 1
   jobs:
-  - name: nginx-1.17.3-test
+  - name: nginx-1.21.3-test
     release: nginx
     properties: {}
   vm_type: default
