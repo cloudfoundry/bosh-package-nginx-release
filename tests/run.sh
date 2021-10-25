@@ -3,10 +3,8 @@
 set -e # -x
 
 echo "-----> `date`: Upload stemcell"
-bosh -n upload-stemcell "https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-trusty-go_agent?v=3468.15" \
-  --sha1 8b5b4d842d829d3c9e0582b2f53de3b3bb576ff5 \
-  --name bosh-warden-boshlite-ubuntu-trusty-go_agent \
-  --version 3468.15
+bosh -n upload-stemcell --sha1 eaed304802aee6050b1f5c680fe8c3fb8e9b5fed \
+  https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-bionic-go_agent?v=1.36
 
 echo "-----> `date`: Delete previous deployment"
 bosh -n -d test delete-deployment --force
