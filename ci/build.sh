@@ -5,7 +5,7 @@ set -e -o pipefail
 cd nginx-release
 
 echo "Starting Docker and Director"
-start-bosh
+source start-bosh
 source /tmp/local-bosh/director/env
 
 echo "Run tests"
