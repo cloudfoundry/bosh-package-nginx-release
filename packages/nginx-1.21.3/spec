@@ -3,8 +3,8 @@ name: nginx-1.21.3
 
 files:
 - nginx-1.21.3.tar.gz
-- headers-more-nginx-module-0.30.tar.gz
+- headers-more-nginx-module-0.33.tar.gz
 - pcre-8.45.tar.gz
-- nginx-upload-module-2.2.tar.gz
-- nginx-upload-module.patch
+- nginx-upload-module-2.3.0.tar.gz
+- ngx_http_hmac_secure_link_module-0.3.tar.gz
 - runtime.env

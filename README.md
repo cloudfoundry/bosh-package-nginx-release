@@ -14,10 +14,10 @@ Included packages:
 
 - nginx-1.21.3 which includes:
 	- nginx-1.21.3.tar.gz
-	- pcre-8.x.tar.gz
-	- headers-more-nginx-module-0.30.tar.gz
-	- nginx-upload-module-2.2.tar.gz
-	- nginx-upload-module.patch
+	- pcre-8.45.tar.gz
+	- headers-more-nginx-module-0.33.tar.gz
+	- nginx-upload-module-2.3.0.tar.gz
+	- ngx_http_hmac_secure_link_module-0.3.tar.gz
 
 To use `nginx-*` package at runtime in your job scripts:
 
@@ -120,6 +120,12 @@ bosh add-blob \
   blobs/pcre-8.45.tar.gz.sig \
   pcre-8.45.tar.gz.sig
 ```
+
+### Optional: Sources
+
+- nginx-upload-module: <https://github.com/vkholodkov/nginx-upload-module/archive/refs/tags/2.3.0.tar.gz>
+- headers-more-nginx-module: <https://github.com/openresty/headers-more-nginx-module/archive/refs/tags/v0.33.tar.gz>
+- ngx_http_hmac_secure_link_module: <https://github.com/nginx-modules/ngx_http_hmac_secure_link_module/archive/refs/tags/0.3.tar.gz>
 
 ### Addenda
 
