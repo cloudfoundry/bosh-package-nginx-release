@@ -5,30 +5,30 @@ To vendor nginx package into your release, run:
 ```
 $ git clone https://github.com/bosh-packages/nginx-release
 $ cd ~/workspace/your-release
-$ bosh vendor-package nginx-1.21.3 ~/workspace/nginx-release
+$ bosh vendor-package nginx ~/workspace/nginx-release
 ```
 
-The above code will add `nginx-1.21.3` to `your-release` and introduce a `spec.lock`.
+The above code will add `nginx` to `your-release` and introduce a `spec.lock`.
 
 Included packages:
 
-- nginx-1.21.3 which includes:
-	- nginx-1.21.3.tar.gz
+- nginx which includes:
+	- nginx-1.*.tar.gz (which will be the latest mainline version of nginx)
 	- pcre-8.45.tar.gz
 	- headers-more-nginx-module-0.33.tar.gz
 	- nginx-upload-module-2.3.0.tar.gz
 	- ngx_http_hmac_secure_link_module-0.3.tar.gz
 
-To use `nginx-*` package at runtime in your job scripts:
+To use the `nginx` package at runtime in your job scripts:
 
 ```bash
 #!/bin/bash -eu
-source /var/vcap/packages/nginx-1.21.3/bosh/runtime.env
+source /var/vcap/packages/nginx/bosh/runtime.env
 source /var/vcap/packages/your-package/bosh/runtime.env
 nginx ...
 ```
 
-See [jobs/nginx-1.21.3-test](jobs/nginx-1.21.3-test) for example.
+See [jobs/nginx-test](jobs/nginx-test) for example.
 
 ## Development
 

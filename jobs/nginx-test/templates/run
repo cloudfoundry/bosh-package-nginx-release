@@ -9,10 +9,10 @@ kill_nginx() {
 }
 
 
-source /var/vcap/packages/nginx-1.21.3/bosh/runtime.env
-cd /var/vcap/packages/nginx-1.21.3/
+source /var/vcap/packages/nginx/bosh/runtime.env
+cd /var/vcap/packages/nginx/
 
-nginx -c /var/vcap/jobs/nginx-1.21.3-test/config/nginx.conf &
+nginx -c /var/vcap/jobs/nginx-test/config/nginx.conf &
 NGINX_PID=$!
 trap kill_nginx EXIT
 
