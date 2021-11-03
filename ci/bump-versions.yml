@@ -1,0 +1,23 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: bosh/main-bosh-docker
+
+inputs:
+- name: nginx-release
+- name: nginx-src
+
+outputs:
+- name: nginx-release-out
+
+run:
+  path: nginx-release/ci/bump-versions.sh
+
+params:
+  GIT_USER_EMAIL: bots@cloudfoundry.org
+  GIT_USER_NAME: CI Bot
+  PRIVATE_YML:
+
