@@ -13,7 +13,7 @@ outputs:
 - name: output_repo
 
 run:
-  path: nginx-release/ci/tasks/shared/bump-nginx-package.sh
+  path: nginx-release/ci/shared/bump-nginx-package.sh
 
 params:
   GIT_USER_NAME: CI Bot
