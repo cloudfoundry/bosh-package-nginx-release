@@ -22,7 +22,12 @@ jobs:
     - task: bump-versions
       file: nginx-release/ci/bump-versions.yml
       params:
-        PRIVATE_YML: ((private-yml))
+        PRIVATE_YML: |
+          ---
+          blobstore:
+            options:
+              access_key_id: ((bosh-packages-nginx-release-uploader_aws_access_key.username))
+              secret_access_key: ((bosh-packages-nginx-release-uploader_aws_access_key.password))
     - put: nginx-release
       params:
         repository: nginx-release-out
@@ -33,7 +38,7 @@ resources:
   source:
     uri: git@github.com:bosh-packages/nginx-release
     branch: master
-    private_key: {{github_deployment_key}}
+    private_key: ((github_deploy_key_nginx-release.private_key))
 
 - name: nginx-src
   type: git
