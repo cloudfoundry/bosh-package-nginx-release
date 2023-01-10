@@ -8,8 +8,8 @@ jobs:
     privileged: true
     file: nginx-release/ci/build.yml
     params:
-      BLOBSTORE_ACCESS_KEY_ID: {{release_blobs_access_key_id}}
-      BLOBSTORE_SECRET_ACCESS_KEY: {{release_blobs_secret_access_key}}
+      BLOBSTORE_ACCESS_KEY_ID: ((bosh-packages-nginx-release-uploader_aws_access_key.username))
+      BLOBSTORE_SECRET_ACCESS_KEY: ((bosh-packages-nginx-release-uploader_aws_access_key.password))
   - put: nginx-release
     params:
       repository: nginx-release-out
