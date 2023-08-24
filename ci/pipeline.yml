@@ -4,6 +4,7 @@ jobs:
   plan:
   - get: nginx-release
     passed: [bump-versions]
+    trigger: true
   - task: build
     privileged: true
     file: nginx-release/ci/build.yml
