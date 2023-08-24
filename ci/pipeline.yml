@@ -2,11 +2,14 @@
 jobs:
 - name: bump-versions
   plan:
-    - get: nginx-release
-    - get: nginx-src
-      trigger: true
+    - in_parallel:
+      - get: nginx-release
+      - get: bosh-cli-registry-image
+      - get: nginx-src
+        trigger: true
     - task: bump-versions
-      file: nginx-release/ci/bump-versions.yml
+      file: nginx-release/ci/tasks/bump-versions.yml
+      image: bosh-cli-registry-image
       params:
         PRIVATE_YML: |
           ---
@@ -17,23 +20,44 @@ jobs:
               assume_role_arn: ((bosh-packages-nginx-release-uploader_assume_aws_access_key.role_arn))
     - put: nginx-release
       params:
-        repository: nginx-release-out
+        repository: nginx-release
 
-- name: build
+- name: test
   plan:
-  - get: nginx-release
-    passed: [bump-versions]
-    trigger: true
+  - in_parallel:
+    - get: nginx-release
+      passed: [bump-versions]
+      trigger: true
+    - get: stemcell
+      resource: jammy-stemcell
+    - get: warden-cpi-registry-image
+  - task: test
+    privileged: true
+    file: nginx-release/ci/tasks/test.yml
+    image: warden-cpi-registry-image
+
+- name: create-final-release
+  plan:
+  - in_parallel:
+    - get: bosh-cli-registry-image
+    - get: nginx-release
+      passed: [test]
+      trigger: true
   - task: build
     privileged: true
-    file: nginx-release/ci/build.yml
+    file: nginx-release/ci/tasks/build.yml
+    image: bosh-cli-registry-image
     params:
-      BLOBSTORE_ACCESS_KEY_ID: ((bosh-packages-nginx-release-uploader_assume_aws_access_key.username))
-      BLOBSTORE_SECRET_ACCESS_KEY: ((bosh-packages-nginx-release-uploader_assume_aws_access_key.password))
-      BLOBSTORE_ASSUME_ROLE_ARN: ((bosh-packages-nginx-release-uploader_assume_aws_access_key.role_arn))
+      PRIVATE_YML: |
+        ---
+        blobstore:
+          options:
+            access_key_id: ((bosh-packages-nginx-release-uploader_assume_aws_access_key.username))
+            secret_access_key: ((bosh-packages-nginx-release-uploader_assume_aws_access_key.password))
+            assume_role_arn: ((bosh-packages-nginx-release-uploader_assume_aws_access_key.role_arn))
   - put: nginx-release
     params:
-      repository: nginx-release-out
+      repository: nginx-release
 
 resources:
 - name: nginx-release
@@ -50,3 +74,22 @@ resources:
     branch: master
     tag_filter: "*"
     fetch_tags: true
+
+- name: bosh-cli-registry-image
+  type: registry-image
+  source:
+    repository: bosh/cli2
+    username: ((docker.username))
+    password: ((docker.password))
+
+- name: warden-cpi-registry-image
+  type: registry-image
+  source:
+    repository: bosh/warden-cpi
+    username: ((docker.username))
+    password: ((docker.password))
+
+- name: jammy-stemcell
+  type: bosh-io-stemcell
+  source:
+    name: bosh-warden-boshlite-ubuntu-jammy-go_agent

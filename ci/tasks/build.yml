@@ -1,0 +1,17 @@
+---
+platform: linux
+
+inputs:
+- name: nginx-release
+
+outputs:
+- name: nginx-release
+
+params:
+  PRIVATE_YML:
+  GIT_USER_NAME: CI Bot
+  GIT_USER_EMAIL: bots@cloudfoundry.org
+
+run:
+  path: nginx-release/ci/tasks/build.sh
+
