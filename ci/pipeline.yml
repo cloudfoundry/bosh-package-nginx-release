@@ -1,21 +1,5 @@
 ---
 jobs:
-- name: build
-  plan:
-  - get: nginx-release
-    passed: [bump-versions]
-    trigger: true
-  - task: build
-    privileged: true
-    file: nginx-release/ci/build.yml
-    params:
-      BLOBSTORE_ACCESS_KEY_ID: ((bosh-packages-nginx-release-uploader_assume_aws_access_key.username))
-      BLOBSTORE_SECRET_ACCESS_KEY: ((bosh-packages-nginx-release-uploader_assume_aws_access_key.password))
-      BLOBSTORE_ASSUME_ROLE_ARN: ((bosh-packages-nginx-release-uploader_assume_aws_access_key.role_arn))
-  - put: nginx-release
-    params:
-      repository: nginx-release-out
-
 - name: bump-versions
   plan:
     - get: nginx-release
@@ -34,6 +18,22 @@ jobs:
     - put: nginx-release
       params:
         repository: nginx-release-out
+
+- name: build
+  plan:
+  - get: nginx-release
+    passed: [bump-versions]
+    trigger: true
+  - task: build
+    privileged: true
+    file: nginx-release/ci/build.yml
+    params:
+      BLOBSTORE_ACCESS_KEY_ID: ((bosh-packages-nginx-release-uploader_assume_aws_access_key.username))
+      BLOBSTORE_SECRET_ACCESS_KEY: ((bosh-packages-nginx-release-uploader_assume_aws_access_key.password))
+      BLOBSTORE_ASSUME_ROLE_ARN: ((bosh-packages-nginx-release-uploader_assume_aws_access_key.role_arn))
+  - put: nginx-release
+    params:
+      repository: nginx-release-out
 
 resources:
 - name: nginx-release
