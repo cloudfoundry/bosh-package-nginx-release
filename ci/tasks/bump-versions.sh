@@ -2,13 +2,10 @@
 
 set -euxo pipefail
 
-# Tags on the nginx repo look like: release-1.2.3
-latest_version=$(cat nginx-src/.git/ref | cut -c 9-)
+latest_blob=$(ls nginx-src/nginx-*.tar.gz | cut -c 7-)
+latest_version=$(cat nginx-src/version)
 
 cd nginx-release
-
-latest_blob="nginx-${latest_version}.tar.gz"
-wget https://nginx.org/download/${latest_blob}
 
 set +x
 echo "${PRIVATE_YML}" > config/private.yml
@@ -23,7 +20,7 @@ if [ "${previous_blob}" == "${latest_blob}" ]; then
 fi
 
 bosh remove-blob "${previous_blob}"
-bosh add-blob "${latest_blob}" ""${latest_blob}"
+bosh add-blob "${latest_blob}" "${latest_blob}"
 bosh upload-blobs
 
 echo "${latest_version}" > packages/nginx/version

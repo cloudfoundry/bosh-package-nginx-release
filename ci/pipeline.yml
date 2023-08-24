@@ -68,12 +68,11 @@ resources:
     private_key: ((github_deploy_key_nginx-release.private_key))
 
 - name: nginx-src
-  type: git
+  type: http-resource
   source:
-    uri: https://github.com/nginx/nginx.git
-    branch: master
-    tag_filter: "*"
-    fetch_tags: true
+    index: "https://nginx.org/download/"
+    regex: 'href="nginx-(?P<version>1[0-9.]+)\.tar\.gz"'
+    uri: "https://nginx.org/download/nginx-{version}.tar.gz"
 
 - name: bosh-cli-registry-image
   type: registry-image
@@ -93,3 +92,9 @@ resources:
   type: bosh-io-stemcell
   source:
     name: bosh-warden-boshlite-ubuntu-jammy-go_agent
+
+resource_types:
+- name: http-resource
+  type: docker-image
+  source:
+    repository: aequitas/http-resource
