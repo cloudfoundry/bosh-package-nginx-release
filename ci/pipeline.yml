@@ -77,7 +77,7 @@ resources:
 - name: bosh-cli-registry-image
   type: registry-image
   source:
-    repository: bosh/cli2
+    repository: bosh/cli
     username: ((docker.username))
     password: ((docker.password))
 
