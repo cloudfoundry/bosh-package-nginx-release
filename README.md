@@ -15,7 +15,7 @@ Included packages:
 - nginx which includes:
 	- nginx-1.*.tar.gz (which will be the latest mainline version of nginx)
 	- pcre-8.45.tar.gz
-	- headers-more-nginx-module-0.33.tar.gz
+	- headers-more-nginx-module-0.34.tar.gz
 	- nginx-upload-module-2.3.0.tar.gz
 	- ngx_http_hmac_secure_link_module-0.3.tar.gz
 
@@ -124,7 +124,7 @@ bosh add-blob \
 ### Optional: Sources
 
 - nginx-upload-module: <https://github.com/vkholodkov/nginx-upload-module/archive/refs/tags/2.3.0.tar.gz>
-- headers-more-nginx-module: <https://github.com/openresty/headers-more-nginx-module/archive/refs/tags/v0.33.tar.gz>
+- headers-more-nginx-module: <https://github.com/openresty/headers-more-nginx-module/archive/refs/tags/v0.34.tar.gz>
 - ngx_http_hmac_secure_link_module: <https://github.com/nginx-modules/ngx_http_hmac_secure_link_module/archive/refs/tags/0.3.tar.gz>
 
 ### Addenda
