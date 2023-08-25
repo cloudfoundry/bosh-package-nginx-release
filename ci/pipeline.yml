@@ -44,7 +44,6 @@ jobs:
       passed: [test]
       trigger: true
   - task: build
-    privileged: true
     file: nginx-release/ci/tasks/build.yml
     image: bosh-cli-registry-image
     params:
