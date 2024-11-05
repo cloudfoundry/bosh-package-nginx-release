@@ -1,5 +1,5 @@
 name: nginx
 blobstore:
-  provider: s3
+  provider: gcs
   options:
     bucket_name: bosh-packages-nginx-release
