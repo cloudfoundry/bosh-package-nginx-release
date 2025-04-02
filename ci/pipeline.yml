@@ -62,9 +62,10 @@ resources:
 - name: nginx-release
   type: git
   source:
-    uri: git@github.com:cloudfoundry/bosh-package-nginx-release
+    uri: https://github.com/cloudfoundry/bosh-package-nginx-release
     branch: main
-    private_key: ((github_deploy_key_nginx-release.private_key))
+    username: bosh-admin-bot
+    password: ((github_public_repo_token))
 
 - name: nginx-src
   type: http-resource
