@@ -17,7 +17,7 @@ jobs:
             provider: gcs
             options:
               credentials_source: static
-              json_key: '((cloud-foundry-gcp-credentials))'
+              json_key: '((gcp_json_key))'
     - put: nginx-release
       params:
         repository: nginx-release
@@ -53,7 +53,7 @@ jobs:
           provider: gcs
           options:
             credentials_source: static
-            json_key: '((cloud-foundry-gcp-credentials))'
+            json_key: '((gcp_json_key))'
   - put: nginx-release
     params:
       repository: nginx-release
@@ -62,10 +62,9 @@ resources:
 - name: nginx-release
   type: git
   source:
-    uri: https://github.com/cloudfoundry/bosh-package-nginx-release
+    uri: git@github.com:cloudfoundry/bosh-package-nginx-release
     branch: main
-    username: bosh-admin-bot
-    password: ((github_public_repo_token))
+    private_key: ((github_deploy_key_nginx-release.private_key))
 
 - name: nginx-src
   type: http-resource
@@ -78,15 +77,15 @@ resources:
   type: registry-image
   source:
     repository: bosh/cli
-    username: ((docker.username))
-    password: ((docker.password))
+    username: ((dockerhub_username))
+    password: ((dockerhub_password))
 
 - name: warden-cpi-registry-image
   type: registry-image
   source:
     repository: bosh/warden-cpi
-    username: ((docker.username))
-    password: ((docker.password))
+    username: ((dockerhub_username))
+    password: ((dockerhub_password))
 
 - name: jammy-stemcell
   type: bosh-io-stemcell
