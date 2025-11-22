@@ -5,8 +5,8 @@ set -eu
 task_dir=$PWD
 repo_output=$task_dir/output_repo
 
-git config --global user.name $GIT_USER_NAME
-git config --global user.email $GIT_USER_EMAIL
+git config --global user.name "${GIT_USER_NAME}"
+git config --global user.email "${GIT_USER_EMAIL}"
 
 git clone input_repo "$repo_output"
 
@@ -15,7 +15,7 @@ cd "$repo_output"
 echo "$PRIVATE_YML" > config/private.yml
 
 for package in $(echo "$PACKAGES" | jq -r '.[]'); do
-  bosh vendor-package $package "$task_dir/nginx-release"
+  bosh vendor-package "${package}" "$task_dir/nginx-release"
 done
 
 if [ -z "$(git status --porcelain)" ]; then

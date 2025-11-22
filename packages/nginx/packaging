@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 set -e -x
 
 echo "Extracting pcre..."
@@ -13,16 +14,16 @@ echo "Extracting ngx_http_hmac_secure_link module..."
 tar xzf ngx_http_hmac_secure_link_module-0.3.tar.gz
 
 echo "Extracting nginx..."
-mkdir nginx-src
+mkdir -p nginx-src
 tar xzvf nginx-1.*.tar.gz -C nginx-src
 nginx_src_directory=$(ls -d nginx-src/nginx*/)
 
 echo "Building nginx..."
 
-pushd ${nginx_src_directory}
+pushd "${nginx_src_directory}"
   ./configure \
     --with-debug \
-    --prefix=${BOSH_INSTALL_TARGET} \
+    --prefix="${BOSH_INSTALL_TARGET}" \
     --with-pcre=../../pcre-8.45 \
     --add-module=../../headers-more-nginx-module-0.34 \
     --with-http_ssl_module \
@@ -35,5 +36,5 @@ pushd ${nginx_src_directory}
   make install
 popd
 
-mkdir ${BOSH_INSTALL_TARGET}/bosh
-cp runtime.env ${BOSH_INSTALL_TARGET}/bosh/runtime.env
+mkdir -p "${BOSH_INSTALL_TARGET}/bosh"
+cp runtime.env "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
