@@ -18,10 +18,12 @@ source /tmp/local-bosh/director/env
 echo "Upload stemcell"
 bosh -n upload-stemcell stemcell/stemcell.tgz
 
+cd "${REPO_ROOT}" # required to deploy source release
+
 echo "Deploy nginx"
 bosh -n -d test deploy \
   --var=stemcell_os="${STEMCELL_OS}" \
-  "${REPO_ROOT}/manifests/test.yml"
+  manifests/test.yml
 
 echo "Run test errand"
 bosh -n -d test run-errand nginx-test
