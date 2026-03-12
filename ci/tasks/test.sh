@@ -1,16 +1,27 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -eu -o pipefail
 
-set -euxo pipefail
+REPO_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../../.." && pwd )"
+REPO_PARENT="$( cd "${REPO_ROOT}/.." && pwd )"
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -x
+  export DEBUG="${DEBUG}"
+  export BOSH_LOG_LEVEL=debug
+  export BOSH_LOG_PATH="${BOSH_LOG_PATH:-${REPO_PARENT}/bosh-debug.log}"
+fi
 
 echo "Starting Docker and Director"
 source start-bosh
 source /tmp/local-bosh/director/env
+
+echo "Upload stemcell"
 bosh -n upload-stemcell stemcell/stemcell.tgz
 
-cd nginx-release
+echo "Deploy nginx"
+bosh -n -d test deploy \
+  --var=stemcell_os="${STEMCELL_OS}" \
+  "${REPO_ROOT}/manifests/test.yml"
 
-echo "Run tests"
-
-bosh -n -d test deploy ./manifests/test.yml
-
+echo "Run test errand"
 bosh -n -d test run-errand nginx-test
