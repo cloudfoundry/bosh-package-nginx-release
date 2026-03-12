@@ -29,12 +29,14 @@ jobs:
       passed: [bump-versions]
       trigger: true
     - get: stemcell
-      resource: jammy-stemcell
+      resource: container-stemcell-image
     - get: warden-cpi-registry-image
   - task: test
-    privileged: true
     file: nginx-release/ci/tasks/test.yml
     image: warden-cpi-registry-image
+    privileged: true
+    params:
+      STEMCELL_OS: ubuntu-noble
 
 - name: create-final-release
   plan:
@@ -76,21 +78,21 @@ resources:
 - name: bosh-cli-registry-image
   type: registry-image
   source:
-    repository: bosh/cli
-    username: ((dockerhub_username))
-    password: ((dockerhub_password))
+    repository: ghcr.io/cloudfoundry/bosh/cli
+    username: ((github_read_write_packages.username))
+    password: ((github_read_write_packages.password))
 
 - name: warden-cpi-registry-image
   type: registry-image
   source:
-    repository: bosh/warden-cpi
-    username: ((dockerhub_username))
-    password: ((dockerhub_password))
+    repository: ghcr.io/cloudfoundry/bosh/warden-cpi
+    username: ((github_read_write_packages.username))
+    password: ((github_read_write_packages.password))
 
-- name: jammy-stemcell
+- name: container-stemcell-image
   type: bosh-io-stemcell
   source:
-    name: bosh-warden-boshlite-ubuntu-jammy-go_agent
+    name: bosh-warden-boshlite-ubuntu-noble
 
 resource_types:
 - name: http-resource
