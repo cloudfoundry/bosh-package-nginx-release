@@ -2,10 +2,10 @@ headers-more-nginx-module-0.34.tar.gz:
   size: 28827
   object_id: f741a53e-4fb8-45bb-780a-64b90f2f5abb
   sha: sha256:0c0d2ced2ce895b3f45eb2b230cd90508ab2a773299f153de14a43e44c1209b3
-nginx-1.29.8.tar.gz:
-  size: 1324131
-  object_id: b339ed68-64d3-4465-7eb5-fe7b3da10893
-  sha: sha256:7f1b985dace8fe706dfc288b83927c928f0ae60bcb7507c2d4e0025eca7280c3
+nginx-1.30.0.tar.gz:
+  size: 1324188
+  object_id: f2d23caa-3453-4057-4b78-d01ac8d1175f
+  sha: sha256:058188c64bf22baecaa72b809a6318a4f9ba623889c554feab03f7cb853ab31b
 nginx-upload-module-2.3.0.tar.gz:
   size: 40139
   object_id: 2e8723ea-d775-4609-761b-169c431bd86b
