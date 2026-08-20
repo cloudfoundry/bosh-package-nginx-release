@@ -12,8 +12,10 @@ if [[ -n "${DEBUG:-}" ]]; then
 fi
 
 echo "Starting Docker and Director"
+# Sourced rather than executed so the docker service can be stopped on exit;
+# see https://github.com/cloudfoundry/bosh/blob/main/ci/dockerfiles/docker-cpi/README.md
 source start-bosh
-source /tmp/local-bosh/director/env
+source /tmp/local-bosh/director/bosh-env
 
 echo "Upload stemcell"
 bosh -n upload-stemcell stemcell/stemcell.tgz
