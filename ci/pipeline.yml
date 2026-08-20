@@ -30,10 +30,10 @@ jobs:
       trigger: true
     - get: stemcell
       resource: container-stemcell-image
-    - get: warden-cpi-registry-image
+    - get: docker-cpi-registry-image
   - task: test
     file: nginx-release/ci/tasks/test.yml
-    image: warden-cpi-registry-image
+    image: docker-cpi-registry-image
     privileged: true
     params:
       STEMCELL_OS: ubuntu-noble
@@ -82,10 +82,11 @@ resources:
     username: ((github_read_write_packages.username))
     password: ((github_read_write_packages.password))
 
-- name: warden-cpi-registry-image
+- name: docker-cpi-registry-image
   type: registry-image
   source:
-    repository: ghcr.io/cloudfoundry/bosh/warden-cpi
+    repository: ghcr.io/cloudfoundry/bosh/docker-cpi
+    tag: main
     username: ((github_read_write_packages.username))
     password: ((github_read_write_packages.password))
 
