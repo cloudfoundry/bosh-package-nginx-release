@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
 
-REPO_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
-REPO_PARENT="$( cd "${REPO_ROOT}/.." && pwd )"
+# Prefixed names: `start-bosh` is sourced below and assigns REPO_ROOT/REPO_PARENT
+# in our shell, which would otherwise clobber these.
+NGINX_REPO_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
+NGINX_REPO_PARENT="$( cd "${NGINX_REPO_ROOT}/.." && pwd )"
 
 if [[ -n "${DEBUG:-}" ]]; then
   set -x
   export DEBUG="${DEBUG}"
   export BOSH_LOG_LEVEL=debug
-  export BOSH_LOG_PATH="${BOSH_LOG_PATH:-${REPO_PARENT}/bosh-debug.log}"
+  export BOSH_LOG_PATH="${BOSH_LOG_PATH:-${NGINX_REPO_PARENT}/bosh-debug.log}"
 fi
 
 echo "Starting Docker and Director"
@@ -20,7 +22,7 @@ source /tmp/local-bosh/director/bosh-env
 echo "Upload stemcell"
 bosh -n upload-stemcell stemcell/stemcell.tgz
 
-cd "${REPO_ROOT}" # required to deploy source release
+cd "${NGINX_REPO_ROOT}" # required to deploy source release
 
 echo "Deploy nginx"
 bosh -n -d test deploy \
