@@ -131,3 +131,25 @@ bosh add-blob \
 
 A copy of the PGP signing keys is available in `keys/` in the event that a key
 server is down or that a key's URL has changed.
+
+### Source verification
+
+The bump task requires `gpgv`. It checks the upstream detached signature against
+`keys/nginx.gpg` before any blobstore operation. The binary keyring is generated
+from the reviewed public-key bundle `keys/nginx.pub` with `gpg --dearmor`.
+Publisher keys must be reviewed and committed; the task never downloads keys.
+Current releases are signed by either of two keys listed at
+https://nginx.org/en/pgp_keys.html:
+
+- Sergey Kandaurov, https://nginx.org/keys/pluknet.key, fingerprint
+  `D6786CE303D9A9022998DC6CC8464D549AF75C0A`
+- Roman Arutyunyan, https://nginx.org/keys/arut.key, fingerprint
+  `43387825DDB1BB97EC36BA5D007C8D7C15D87369`
+
+The behavioral tests use an official archive and its detached signature:
+
+```sh
+NGINX_SOURCE_FIXTURE=/path/to/nginx-version.tar.gz \
+NGINX_SIGNATURE_FIXTURE=/path/to/nginx-version.tar.gz.asc \
+NGINX_FIXTURE_VERSION=version python3 ci/tests/source_signature_test.py
+```
